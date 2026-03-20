@@ -8,27 +8,27 @@ class Queue {
 	NodePtr headPtr,tailPtr;
 	int size;
 public:
-    void enqueue(int);
-    int dequeue();
+    void enqueue(string, int);
+    NodePtr dequeue();
     Queue();
     ~Queue();
 };
 
 
-void Queue::enqueue(int x){
-  NodePtr new_node= new NODE(x);
+void Queue::enqueue(string order, int qty){
+  NodePtr new_node= new NODE(order, qty);
   if(new_node!=NULL)
   { 
-   if(size>0)
-   {
-   tailPtr->set_next(new_node);
-   }
-   else
-   {
-      headPtr->new_node; 
-   }
-    tailPtr->new_node;
-   size++;
+   if(size > 0)
+  {
+      tailPtr->set_next(new_node);   
+  }
+  else
+  {
+      headPtr = new_node;            
+  }
+  tailPtr = new_node;
+  size++;
  }
  else
  {
@@ -36,34 +36,32 @@ void Queue::enqueue(int x){
  }
 }
 
-int Queue::dequeue(){
+NodePtr Queue::dequeue(){
   if(size>0)
   {
     NodePtr t = headPtr;
-    int value = t->get_value();
     headPtr = headPtr->get_next();
     size--;
     if(size==0) tailPtr = NULL;
-    cout<<"dequeing"<< value << endl;
-    delete t;
-    return value;
+    return t;
   }
-  cout<<"Empty queue"<<endl;
-  return -1;
+  return NULL;
 }
 
 
-Queue::Queue(){
-    headPtr=NULL;
-    tailPtr=NULL;
-    size=0;
+Queue::Queue()
+{
+    headPtr = NULL;
+    tailPtr = NULL;
+    size = 0;
 }
 
 Queue::~Queue(){
       cout<<"Dequeue all"<<endl;
       while(size > 0)
       {
-        dequeue();
+          NodePtr t = dequeue();
+          delete t;
       }
 }
 

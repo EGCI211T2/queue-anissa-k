@@ -1,46 +1,58 @@
 #ifndef node_h
 #define node_h
+
+#include <iostream>
+#include <string>
+using namespace std;
+
 class NODE{
-     int data;
+     string order;
+     int qty;
     NODE *nextPtr;
 public:
-    NODE(int);
+    NODE(string o, int q);
     ~NODE();
+
     void set_next(NODE*);
     NODE* get_next();
-    int get_value();
+
+    string get_order();
+    int get_qty();
 };
+
 typedef NODE* NodePtr;
 
-
-NODE::NODE(int x){
-    data=x;
-    nextPtr=NULL;
-   
+NODE::NODE(string o, int q)
+{
+    order = o;
+    qty = q;
+    nextPtr = NULL;
 }
-NODE* NODE::get_next(){
+
+string NODE::get_order()
+{
+    return order;
+}
+
+int NODE::get_qty()
+{
+    return qty;
+}
+
+NODE* NODE::get_next()
+{
     return nextPtr;
+} 
 
-}
-
-int NODE::get_value(){
-    return data;
-
-}
-
-
-void NODE::set_next(NODE *t){
+void NODE::set_next(NODE *t)
+{
      nextPtr=t;
-
-}
-NODE::~NODE(){
-     cout<<" "<<data<<endl;
-
 }
 
-
-
-
+NODE::~NODE()
+{
+     cout<< " Deleting " << order <<endl;
+}
 
 
 #endif
